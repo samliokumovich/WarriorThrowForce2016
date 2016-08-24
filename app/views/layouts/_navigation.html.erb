@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default ">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to image_tag("logo.jpg"), root_path, class: 'navbar-brand', id: "img_header" %>
+      <%= link_to 'Deerfield Throw Force', root_path, class: "logo_text" %>
+      </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><%= link_to 'News', news_path %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Meets <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Bartlet</a></li>
+            <li><a href="#">Deerfield Invite</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Sectionals</a></li>
+            <li><a href="#">State</a></li>
+          </ul>
+        </li>
+        <% if logged_in? %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Workouts <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">View Your Maxes</a></li>
+            <li><a href="#">Update Your Maxes </a></li>
+            <li><a href="#">Log A Workout </a></li>
+          </ul>
+        </li>
+       <% end %>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="Profile">
+          <% if logged_in? %>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">  <%= current_user.username %>  <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+
+            <li><a href="#">Settings</a></li>
+            <li role="separator" class="divider"></li>
+            <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+            <% if current_user.admin? %>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Admin Panel', admin_controller_path %></li>
+            <% end %>
+          </ul>
+          <% else %>
+          <li class="active"><%= link_to 'Sign Up',  new_user_path %></li>
+          <li><%= link_to 'Login', login_path %></li>
+          <% end %>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
